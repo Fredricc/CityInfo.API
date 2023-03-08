@@ -77,8 +77,8 @@ namespace CityInfo.API
                              Description = "Largest wildlife National park located in a city." },
                           new PointOfInterestDto() {
                              Id = 8,
-                             Name = "The ",
-                             Description = "The world's largest museum." },
+                             Name = "The National Museum Of Nairobi ",
+                             Description = "The Home of the first Man on earth." },
                      }
                 }
             };

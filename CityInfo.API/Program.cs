@@ -8,7 +8,7 @@ using Serilog;
 Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Debug()
     .WriteTo.Console()
-    .WriteTo.File("log/cityinfo.txt", rollingInterval: RollingInterval.Day)
+    .WriteTo.File("logs/cityinfo.txt", rollingInterval: RollingInterval.Day)
     .CreateLogger();
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,32 +17,32 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Host.UseSerilog();
 
-
 // Add services to the container.
 
 builder.Services.AddControllers(options =>
 {
-    options.ReturnHttpNotAcceptable= true;
+    options.ReturnHttpNotAcceptable = true;
+}).AddNewtonsoftJson()
+.AddXmlDataContractSerializerFormatters();
 
-}).AddNewtonsoftJson() 
-    .AddXmlDataContractSerializerFormatters();
 
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+// Learn more about configuring Swagger/OpenAPI at
+// https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<FileExtensionContentTypeProvider>();
 
 #if DEBUG
 builder.Services.AddTransient<IMailService, LocalMailService>();
-#else
+#else 
 builder.Services.AddTransient<IMailService, CloudMailService>();
 #endif
 
 builder.Services.AddSingleton<CitiesDataStore>();
 
-builder.Services.AddDbContext<CityInfoContext>(dbContextOptions => dbContextOptions.UseSqlite("Data Source = CityInfo.db"));
-
-
+builder.Services.AddDbContext<CityInfoContext>(
+    dbContextOptions => dbContextOptions.UseSqlite(
+        connectionString: builder.Configuration["ConnectionStrings:CityInfoDBConnectionString"]));
 
 var app = builder.Build();
 

@@ -77,7 +77,7 @@ namespace CityInfo.API.DbContexts
                    Id = 6,
                    CityId = 3,
                    Description = "The world's largest museum."
-               }
+               },
                new PointOfInterest("KICC")
                {
                    Id = 7,
