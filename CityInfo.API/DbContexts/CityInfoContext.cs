@@ -6,48 +6,42 @@ namespace CityInfo.API.DbContexts
     public class CityInfoContext : DbContext
     {
         public DbSet<City> Cities { get; set; } = null!;
-
         public DbSet<PointOfInterest> PointsOfInterest { get; set; } = null!;
 
-        public CityInfoContext(DbContextOptions<CityInfoContext> options) 
-            : base(options) 
+        public CityInfoContext(DbContextOptions<CityInfoContext> options)
+            : base(options)
         {
-        
+
         }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<City>()
                 .HasData(
-                new City("New York City")
-                {
-                    Id = 1,
-                    Description = "The one with that big Park."
-                },
-                new City("Antwerp")
-                {
-                    Id =2 ,
-                    Description = "The one the cathedral that was never really finished."
-                },
-                 new City("Paris")
-                 {
-                     Id = 3,
-                     Description = "The one with the big tower."
-                 },
-                  new City("Nairobi")
-                  {
-                      Id = 4,
-                      Description = "The one with that big National Park."
-                  }
+               new City("New York City")
+               {
+                   Id = 1,
+                   Description = "The one with that big park."
+               },
+               new City("Antwerp")
+               {
+                   Id = 2,
+                   Description = "The one with the cathedral that was never really finished."
+               },
+               new City("Paris")
+               {
+                   Id = 3,
+                   Description = "The one with that big tower."
+               });
 
-                );
             modelBuilder.Entity<PointOfInterest>()
-                 .HasData(
-                new PointOfInterest("Central Park")
-                {
-                    Id = 1,
-                    CityId = 1,
-                    Description = "The most visited urban park in the United States."
-                },
+             .HasData(
+               new PointOfInterest("Central Park")
+               {
+                   Id = 1,
+                   CityId = 1,
+                   Description = "The most visited urban park in the United States."
+               },
                new PointOfInterest("Empire State Building")
                {
                    Id = 2,
@@ -64,7 +58,7 @@ namespace CityInfo.API.DbContexts
                {
                    Id = 4,
                    CityId = 2,
-                   Description = "The finest example of railway architecture in Belgium."
+                   Description = "The the finest example of railway architecture in Belgium."
                },
                new PointOfInterest("Eiffel Tower")
                {
@@ -81,13 +75,13 @@ namespace CityInfo.API.DbContexts
                new PointOfInterest("KICC")
                {
                    Id = 7,
-                   CityId = 3,
+                   CityId = 4,
                    Description = "A wrought iron lattice tower on the Champ de Mars, named after engineer Gustave Eiffel."
                },
                new PointOfInterest("The National Museum")
                {
                    Id = 8,
-                   CityId = 3,
+                   CityId = 4,
                    Description = "The world's largest museum."
                }
                );
