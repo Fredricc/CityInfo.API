@@ -32,6 +32,11 @@ namespace CityInfo.API.DbContexts
                {
                    Id = 3,
                    Description = "The one with that big tower."
+               },
+               new City("Nairobi")
+               {
+                   Id = 4,
+                   Description = "The one with that big tower."
                });
 
             modelBuilder.Entity<PointOfInterest>()
@@ -58,7 +63,7 @@ namespace CityInfo.API.DbContexts
                {
                    Id = 4,
                    CityId = 2,
-                   Description = "The the finest example of railway architecture in Belgium."
+                   Description = "The finest example of railway architecture in Belgium."
                },
                new PointOfInterest("Eiffel Tower")
                {
@@ -76,13 +81,13 @@ namespace CityInfo.API.DbContexts
                {
                    Id = 7,
                    CityId = 4,
-                   Description = "A wrought iron lattice tower on the Champ de Mars, named after engineer Gustave Eiffel."
+                   Description = "A round tower with the stature of the first president of Kenya  ."
                },
                new PointOfInterest("The National Museum")
                {
                    Id = 8,
                    CityId = 4,
-                   Description = "The world's largest museum."
+                   Description = "The home of the first human."
                }
                );
             base.OnModelCreating(modelBuilder);
