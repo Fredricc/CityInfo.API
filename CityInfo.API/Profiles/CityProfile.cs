@@ -1,6 +1,12 @@
-﻿namespace CityInfo.API.Profiles
+﻿using AutoMapper;
+
+namespace CityInfo.API.Profiles
 {
-    public class CityProfiles
+    public class CityProfile
     {
+        public CityProfile() 
+        {
+                CreateMap<Entities.City, Models.CityWithoutPointsOfInterestDto>();
+        }
     }
 }
