@@ -2,7 +2,7 @@
 
 namespace CityInfo.API.Profiles
 {
-    public class CityProfile
+    public class CityProfile : Profile
     {
         public CityProfile() 
         {
