@@ -24,7 +24,8 @@ namespace CityInfo.API.Controllers
         }
 
         [HttpGet]
-        public async Task< ActionResult<IEnumerable<CityDto>>> GetCities()
+        public async Task< ActionResult<IEnumerable<CityDto>>> GetCities(
+            string? name)
         {
             var cityEntities = await _cityInfoRepository.GetCitiesAsync();
 
