@@ -8,6 +8,7 @@ using Serilog;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System.Reflection;
+using Microsoft.OpenApi.Models;
 
 Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Debug()
@@ -39,6 +40,13 @@ builder.Services.AddSwaggerGen(setupAction =>
     var xmlCommentsFullPath = Path.Combine(AppContext.BaseDirectory, xmlCommentsFile);
 
     setupAction.IncludeXmlComments(xmlCommentsFullPath);
+
+    setupAction.AddSecurityDefinition("CityInfoApiBearerAuth", new OpenApiSecurityScheme()
+    {
+        Type = SecuritySchemeType.Http,
+        Scheme = "Bearer",
+        Description = "Input a valid token to access this API"
+    });
 });
 
 

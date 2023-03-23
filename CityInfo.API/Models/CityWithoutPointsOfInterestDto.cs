@@ -1,7 +1,8 @@
 ﻿namespace CityInfo.API.Models
 {
     public class CityWithoutPointsOfInterestDto
-    {/// <summary>
+    {
+    /// <summary>
     /// The id of the city
     /// </summary>
         public int Id { get; set; }
