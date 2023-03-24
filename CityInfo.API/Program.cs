@@ -3,12 +3,11 @@ using CityInfo.API.DbContexts;
 using CityInfo.API.Services;
 using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.EntityFrameworkCore;
-using AutoMapper;
-using Serilog;
 using Microsoft.IdentityModel.Tokens;
-using System.Text;
-using System.Reflection;
 using Microsoft.OpenApi.Models;
+using Serilog;
+using System.Reflection;
+using System.Text;
 
 Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Debug()
@@ -46,6 +45,17 @@ builder.Services.AddSwaggerGen(setupAction =>
         Type = SecuritySchemeType.Http,
         Scheme = "Bearer",
         Description = "Input a valid token to access this API"
+    });
+
+    setupAction.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "CityInfoApiBearerAuth" }
+            }, new List<string>() }
     });
 });
 

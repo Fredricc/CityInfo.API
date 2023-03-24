@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using CityInfo.API.Entities;
 using CityInfo.API.Models;
 using CityInfo.API.Services;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 
@@ -24,28 +24,28 @@ namespace CityInfo.API.Controllers
             ICityInfoRepository cityInfoRepository,
             IMapper mapper)
         {
-
             _logger = logger ?? 
                 throw new ArgumentNullException(nameof(logger));
-            _mailService = mailService ??
-                throw new ArgumentNullException((nameof(mailService)));
-            _mapper = mapper ?? 
-                throw new ArgumentNullException(nameof(mapper));
+            _mailService = mailService ?? 
+                throw new ArgumentNullException(nameof(mailService));
             _cityInfoRepository = cityInfoRepository ?? 
                 throw new ArgumentNullException(nameof(cityInfoRepository));
+            _mapper = mapper ?? 
+                throw new ArgumentNullException(nameof(mapper));
         }
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<PointOfInterestDto>>> GetPointsOfInterest(
             int cityId)
         {
+
             //var cityName = User.Claims.FirstOrDefault(c => c.Type == "city")?.Value;
 
             //if (!await _cityInfoRepository.CityNameMatchesCityId(cityName, cityId))
-            //    {
+            //{
             //    return Forbid();
             //}
-    
+
             if (!await _cityInfoRepository.CityExistsAsync(cityId))
             {
                 _logger.LogInformation(
@@ -96,7 +96,7 @@ namespace CityInfo.API.Controllers
 
             await _cityInfoRepository.SaveChangesAsync();
 
-            var createdPointOfInterestToReturn =
+            var createdPointOfInterestToReturn = 
                 _mapper.Map<Models.PointOfInterestDto>(finalPointOfInterest);
 
             return CreatedAtRoute("GetPointOfInterest",
@@ -192,7 +192,7 @@ namespace CityInfo.API.Controllers
             _mailService.Send(
                 "Point of interest deleted.",
                 $"Point of interest {pointOfInterestEntity.Name} with id {pointOfInterestEntity.Id} was deleted.");
-
+         
             return NoContent();
         }
 
